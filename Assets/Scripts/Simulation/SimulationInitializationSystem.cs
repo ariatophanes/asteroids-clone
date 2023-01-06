@@ -4,15 +4,14 @@ namespace Simulation
 {
     public class SimulationInitializationSystem : IGameSystem
     {
-        private readonly IModelsStorage modelsStorage;
+        private readonly IWorld world;
 
-        public SimulationInitializationSystem(IModelsStorage modelsStorage) => this.modelsStorage = modelsStorage;
+        public SimulationInitializationSystem(IWorld world) => this.world = world;
 
         public void OnStart()
         {
-            this.modelsStorage.AddModel("Simulation");
-            this.modelsStorage.AddComponent<CoordinateSystem>("Simulation");
-            this.modelsStorage.AddComponent<Time>("Simulation");
+            var simulation = this.world.NewEntity();
+            ref var time = ref this.world.GetComponent<Time>(simulation);
         }
 
         public void OnUpdate() { }

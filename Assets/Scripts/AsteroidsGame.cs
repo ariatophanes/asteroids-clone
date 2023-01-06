@@ -5,17 +5,17 @@ using Rules;
 using Simulation;
 using UnityEngine;
 
-public class AsteroidsGame : Application
+public class AsteroidsGame : EcsApplication
 {
-    public AsteroidsGame(IModelsStorage modelsStorage, IViewKernel viewKernel, ISystemKernel systemKernel) : base(modelsStorage, viewKernel, systemKernel) { }
+    public AsteroidsGame(IWorld world, IViewKernel viewKernel, ISystemKernel systemKernel) : base(world, viewKernel, systemKernel) { }
 
-    protected override void InstallSystems(ISystemKernel kernel, IModelsStorage modelsStorage, IViewKernel viewKernel)
+    protected override void InstallSystems(ISystemKernel kernel, IWorld world, IViewKernel viewKernel)
     {
         var config = Resources.Load<GameConfiguration>("Configs/GameConfig");
         
-        kernel.AddSystem(new SimulationInitializationSystem(modelsStorage));
-        kernel.AddSystem(new RulesInitializationSystem(modelsStorage, config));
-        kernel.AddSystem(new PlayerSpawnSystem(modelsStorage, viewKernel));
-        kernel.AddSystem(new EnemySpawnSystem(modelsStorage));
+        kernel.AddSystem(new SimulationInitializationSystem(world));
+        kernel.AddSystem(new ModelsInitializationSystem(world, config));
+        kernel.AddSystem(new PlayerSpawnSystem(world, viewKernel));
+        kernel.AddSystem(new EnemySpawnSystem(world));
     }
 }

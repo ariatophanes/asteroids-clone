@@ -2,6 +2,6 @@ using Core;
 
 public interface IView
 {
-    public void OnUpdate(string modelName, IModelsStorage models);
+    public void OnUpdate(int id, IWorld world);
 }
 

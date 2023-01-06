@@ -1,0 +1,98 @@
+{
+    "name": "Controls",
+    "maps": [
+        {
+            "name": "General",
+            "id": "cbf414e8-2d36-4cd6-896d-3b5679f817b7",
+            "actions": [
+                {
+                    "name": "HorizontalAxis",
+                    "type": "Value",
+                    "id": "db908581-ee8d-41d2-8462-c5e596fc6323",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "VerticalAxis",
+                    "type": "Value",
+                    "id": "208e2bc7-baa3-4234-85ca-7d046c464b6f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Vector",
+                    "id": "4bb27f1c-2a4e-40a3-b9df-e28751304cba",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalAxis",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "41b60368-3a8d-42ef-9266-14df43b3764e",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "e38b4447-bc34-492f-8733-3504df22756f",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Vector",
+                    "id": "e88ff42a-62fb-4a13-b3b3-b826270cae68",
+                    "path": "1DAxis(minValue=0)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalAxis",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f1c7f7fe-4e06-4304-94d8-eb2dddcb5e5c",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "fbaac955-ce76-48c9-b572-eafaee254510",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

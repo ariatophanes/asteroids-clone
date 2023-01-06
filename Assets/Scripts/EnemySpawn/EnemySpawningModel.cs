@@ -1,6 +1,6 @@
 namespace EnemySpawn
 {
-    public struct EnemySpawnRules
+    public struct EnemySpawningModel
     {
         public float Ratio;
         public float Interval;

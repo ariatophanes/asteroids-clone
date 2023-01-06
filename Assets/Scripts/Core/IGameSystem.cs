@@ -1,6 +1,5 @@
 namespace Core
 {
-    //TODO: split to IInitializableGameSystem, IUpdatableGameSystem interfaces
     public interface IGameSystem
     {
         public void OnStart();

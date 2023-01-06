@@ -5,70 +5,71 @@ using Core;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class UnityViewKernel : IViewKernel
+namespace UnitySpecificThings
 {
-    private readonly Dictionary<IView, GameObject> gameObjects;
-    private readonly Dictionary<string, IView> views;
-    private readonly HashSet<string> modelNames;
-    private readonly HashSet<string> unresolvedBindings;
-    private readonly IModelsStorage modelsStorage;
-
-    public UnityViewKernel(IModelsStorage modelsStorage)
+    public class UnityViewKernel : IViewKernel
     {
-        this.modelsStorage = modelsStorage;
-        this.views = new Dictionary<string, IView>(100);
-        this.gameObjects = new Dictionary<IView, GameObject>(100);
-        this.modelNames = new HashSet<string>(100);
-        this.unresolvedBindings = new HashSet<string>(30);
-    }
+        private readonly Dictionary<IView, GameObject> gameObjects;
+        private readonly Dictionary<int, IView> views;
+        private readonly HashSet<int> bindings, unresolvedBindings;
+        private readonly IWorld world;
+        private readonly IAssetProvider assetProvider;
 
-    public void InstantiateModelView(string modelName, string resPath) //todo: add "creator" for easy pooling
-    {
-        if (this.modelNames.Contains(modelName)) throw new ArgumentException();
-
-        var prefab = Resources.Load<GameObject>(resPath);
-        var go = GameObject.Instantiate(prefab);
-        var modelView = go.GetComponent<IView>();
-
-        this.views[modelName] = modelView;
-        this.gameObjects[modelView] = go;
-        this.modelNames.Add(modelName);
-    }
-
-    public void DestroyModelView(string modelName)
-    {
-        if (!this.modelNames.Contains(modelName)) throw new ArgumentException();
-
-        var modelView = this.views[modelName];
-        var go = this.gameObjects[modelView];
-
-        this.gameObjects.Remove(modelView);
-        this.views.Remove(modelName);
-        this.modelNames.Remove(modelName);
-
-        Object.Destroy(go);
-    }
-
-    public void UpdateViews()
-    {
-        foreach (var modelName in this.modelNames.Where(CanResolveBinding))
+        public UnityViewKernel(IWorld world, IAssetProvider assetProvider)
         {
-            this.views[modelName].OnUpdate(modelName, this.modelsStorage);
+            this.assetProvider = assetProvider;
+            this.world = world;
+            this.views = new Dictionary<int, IView>(100);
+            this.gameObjects = new Dictionary<IView, GameObject>(100);
+            this.bindings = new HashSet<int>(100);
+            this.unresolvedBindings = new HashSet<int>(30);
         }
-    }
 
-    private bool CanResolveBinding(string modelName)
-    {
-        if (this.modelsStorage.HasModel(modelName)) return true;
-        if (this.unresolvedBindings.Contains(modelName)) return false;
-        this.unresolvedBindings.Add(modelName);
-        return false;
-    }
+        public void BindView(int id, string path)
+        {
+            if (this.bindings.Contains(id)) throw new ArgumentException();
 
-    public void FixUnresolvedBindings()
-    {
-        foreach (var modelName in this.unresolvedBindings) DestroyModelView(modelName);
+            var prefab = this.assetProvider.Load<GameObject>(path);
+            var go = Object.Instantiate(prefab);
+            var modelView = go.GetComponent<IView>();
 
-        this.unresolvedBindings.Clear();
+            this.views[id] = modelView;
+            this.gameObjects[modelView] = go;
+            this.bindings.Add(id);
+        }
+
+        public void DestroyView(int id)
+        {
+            if (!this.bindings.Contains(id)) throw new ArgumentException();
+
+            var modelView = this.views[id];
+            var go = this.gameObjects[modelView];
+
+            this.gameObjects.Remove(modelView);
+            this.views.Remove(id);
+            this.bindings.Remove(id);
+
+            Object.Destroy(go);
+        }
+
+        public void Update()
+        {
+            foreach (var id in this.bindings.Where(IsBindingResolvable)) this.views[id].OnUpdate(id, this.world);
+        }
+
+        private bool IsBindingResolvable(int id)
+        {
+            if (this.world.HasEntity(id)) return true;
+            if (this.unresolvedBindings.Contains(id)) return false;
+            this.unresolvedBindings.Add(id);
+            
+            return false;
+        }
+
+        public void FixUnresolvedBindings()
+        {
+            foreach (var id in this.unresolvedBindings) DestroyView(id);
+            this.unresolvedBindings.Clear();
+        }
     }
 }

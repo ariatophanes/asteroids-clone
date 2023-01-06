@@ -1,3 +1,4 @@
+using System.Linq;
 using Core;
 using Simulation;
 
@@ -6,27 +7,30 @@ namespace EnemySpawn
     public class EnemySpawnSystem : IGameSystem
     {
         private readonly IEnemyModelFactory enemyModelFactory;
-        private readonly IModelsStorage modelsStorage;
+        private readonly IWorld world;
         private IEnemyTypePicker typePicker;
 
-        public EnemySpawnSystem(IModelsStorage modelsStorage)
+        public EnemySpawnSystem(IWorld world)
         {
-            this.enemyModelFactory = new EnemyModelFactory(modelsStorage);
-            this.modelsStorage = modelsStorage;
+            this.enemyModelFactory = new EnemyFactory(world);
+            this.world = world;
         }
 
         public void OnStart()
         {
-            ref var spawnRules = ref this.modelsStorage.GetComponent<EnemySpawnRules>("Rules");
-            this.typePicker = new EnemyTypePicker(spawnRules.Ratio, spawnRules.Interval);
+            // var modelEnt = this.world.Filter(typeof(EnemySpawningModel));
+            // ref var model = ref this.world.GetComponent<EnemySpawningModel>(modelEnt.First());
+            // this.typePicker = new EnemyTypePicker(model.Ratio, model.Interval);
         }
 
         public void OnUpdate()
         {
-            ref var time = ref modelsStorage.GetComponent<Time>("Simulation");
-            ref var enemyType = ref typePicker.GetEnemyType(time.Elapsed);
-
-            if (enemyType != -1) enemyModelFactory.Create(enemyType);
+            // var timeEnt = this.world.Filter(typeof(Time));
+            // ref var time = ref this.world.GetComponent<Time>(timeEnt.First());
+            //
+            // ref var enemyType = ref typePicker.GetEnemyType(time.Elapsed);
+            //
+            // if (enemyType != -1) enemyModelFactory.Create(enemyType);
         }
 
         public void OnStop() { }

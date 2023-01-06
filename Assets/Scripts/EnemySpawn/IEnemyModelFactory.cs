@@ -2,6 +2,6 @@ namespace EnemySpawn
 {
     public interface IEnemyModelFactory
     {
-        public string Create(int type);
+        public int Create(int type);
     }
 }
