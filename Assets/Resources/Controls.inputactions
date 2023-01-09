@@ -6,90 +6,110 @@
             "id": "cbf414e8-2d36-4cd6-896d-3b5679f817b7",
             "actions": [
                 {
-                    "name": "HorizontalAxis",
-                    "type": "Value",
+                    "name": "Move",
+                    "type": "PassThrough",
                     "id": "db908581-ee8d-41d2-8462-c5e596fc6323",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "VerticalAxis",
-                    "type": "Value",
-                    "id": "208e2bc7-baa3-4234-85ca-7d046c464b6f",
+                    "name": "First Attack",
+                    "type": "Button",
+                    "id": "8ddc4cab-d85a-4571-8b0e-0ea944bf4df7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Second Attack",
+                    "type": "Button",
+                    "id": "e1132491-bfb3-4612-8a7c-806bf5b14b8c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "Vector",
-                    "id": "4bb27f1c-2a4e-40a3-b9df-e28751304cba",
-                    "path": "1DAxis",
+                    "name": "2D Vector",
+                    "id": "a6b6277f-4a1b-42b7-b2e7-929a1699f49b",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "HorizontalAxis",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "41b60368-3a8d-42ef-9266-14df43b3764e",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HorizontalAxis",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "e38b4447-bc34-492f-8733-3504df22756f",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HorizontalAxis",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Vector",
-                    "id": "e88ff42a-62fb-4a13-b3b3-b826270cae68",
-                    "path": "1DAxis(minValue=0)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "VerticalAxis",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "f1c7f7fe-4e06-4304-94d8-eb2dddcb5e5c",
+                    "name": "up",
+                    "id": "9fd1e5dd-3e57-4dbc-a793-a33068021946",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "VerticalAxis",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "fbaac955-ce76-48c9-b572-eafaee254510",
+                    "name": "down",
+                    "id": "8bdfe338-94ff-46f9-a74f-7a79d9bf1438",
                     "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "Clamp",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "1c573cb2-927b-4d43-b24f-b1cd0ccacede",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "VerticalAxis",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "bfe7ea37-8146-4866-87ae-84b23324649b",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "768c1af6-0d8d-465f-956b-08b5bc196407",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "First Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "310bca66-21cc-4a90-9798-d8d8d44ca041",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Second Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

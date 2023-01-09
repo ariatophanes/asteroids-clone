@@ -4,7 +4,8 @@ namespace Core
     {
         void Run();
         void Stop();
-        void AddSystem(IGameSystem system);
+        void AddSystem(object system);
         void Update();
+        void FixedUpdate();
     }
 }

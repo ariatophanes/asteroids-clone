@@ -1,3 +1,4 @@
+using UnityAdaptation;
 using UnityEngine;
 
 public class AssetProviderRes : IAssetProvider

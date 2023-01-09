@@ -1,7 +1,10 @@
-public interface IViewKernel
+namespace Core
 {
-    void BindView(int id, string resPath);
-    void DestroyView(int id);
-    void Update();
-    void FixUnresolvedBindings();
+    public interface IViewKernel
+    {
+        void BindView(int id, string resPath);
+        void DestroyView(int id);
+        void Update();
+        void FixUnresolvedBindings();
+    }
 }

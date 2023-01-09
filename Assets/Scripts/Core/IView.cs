@@ -1,7 +1,8 @@
-using Core;
-
-public interface IView
+namespace Core
 {
-    public void OnUpdate(int id, IWorld world);
+    public interface IView
+    {
+        public void OnUpdate(int id, IWorld world);
+    }
 }
 
