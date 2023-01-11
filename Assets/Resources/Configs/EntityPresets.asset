@@ -12,54 +12,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9bb21987fd4f36a45e7c2614780f0f, type: 3}
   m_Name: EntityPresets
   m_EditorClassIdentifier: 
-  <Player>k__BackingField:
+  <PlayerPreset>k__BackingField:
     Rb:
       Mass: 1
-      AngularForce: 350
+      AngularForce: 0
       AngularMomentumSpeed: 0
       Deceleration: 0.0325
     Radius:
       Value: 0.5
     ViewPath: Views/Player
-  <Bullets>k__BackingField:
-  - Rb:
-      Mass: 0.25
-      AngularForce: 0
-      AngularMomentumSpeed: 0
-      Deceleration: 0
-    Radius:
-      Value: 0.25
-    Damage:
-      Value: 0
-    AttackType: 0
-    ViewPath: Views/Missiles/Gun
-  - Rb:
-      Mass: 0.25
-      AngularForce: 0
-      AngularMomentumSpeed: 0
-      Deceleration: 0
-    Radius:
-      Value: 0.25
-    Damage:
-      Value: 0
-    AttackType: 1
-    ViewPath: Views/Missiles/Laser
-  <Enemies>k__BackingField:
-  - Type: 0
-    Rb:
-      Mass: 2
-      AngularForce: 0
-      AngularMomentumSpeed: 0
-      Deceleration: 0
-    Radius:
-      Value: 1
-    ViewPath: Views/Enemies/Asteroid
-  - Type: 1
-    Rb:
-      Mass: 2
-      AngularForce: 0
-      AngularMomentumSpeed: 0
-      Deceleration: 0.025
-    Radius:
-      Value: 0.5
-    ViewPath: Views/Enemies/UFO
+  <MissilePresets>k__BackingField:
+    Gun:
+      Rb:
+        Mass: 0.25
+        AngularForce: 0
+        AngularMomentumSpeed: 0
+        Deceleration: 0
+      Radius:
+        Value: 1
+      Damage:
+        Value: 1
+      AttackType: 0
+      ViewPath: Views/Missiles/Gun
+    Laser:
+      Rb:
+        Mass: 0.25
+        AngularForce: 0
+        AngularMomentumSpeed: 0
+        Deceleration: 0
+      Radius:
+        Value: 1
+      Damage:
+        Value: 99999
+      AttackType: 1
+      ViewPath: Views/Missiles/Laser
+  <EnemyPresets>k__BackingField:
+    Ufo:
+      Type: 1
+      Rb:
+        Mass: 1
+        AngularForce: 0
+        AngularMomentumSpeed: 0
+        Deceleration: 0.035
+      Radius:
+        Value: 0.5
+      ViewPath: Views/Enemies/UFO
+      Damageable:
+        ReceivedDamage: 0
+        TolerableDamage: 2
+    Asteroid:
+      Type: 0
+      Rb:
+        Mass: 4
+        AngularForce: 0
+        AngularMomentumSpeed: 0
+        Deceleration: 0
+      Radius:
+        Value: 1
+      ViewPath: Views/Enemies/Asteroid
+      Damageable:
+        ReceivedDamage: 0
+        TolerableDamage: 6

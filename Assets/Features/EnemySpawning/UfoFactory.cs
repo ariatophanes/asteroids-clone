@@ -1,0 +1,23 @@
+using Core.Infrastructure;
+using Core.Random;
+using EnemySpawning.Tags;
+using MovementBehaviour.TowardsPlayer;
+using Presets;
+
+namespace EnemySpawning
+{
+    public class UfoFactory : EnemyFactory
+    {
+        private readonly IWorld world;
+
+        public UfoFactory(IWorld world, EnemyPreset preset, IRandom random) : base(world, preset, random) => this.world = world;
+
+        public override int Create()
+        {
+            var ufo = base.Create();
+            this.world.SetComponent<MoveTowardsPlayerBehaviour>(ufo);
+            this.world.SetComponent<Ufo>(ufo);
+            return ufo;
+        }
+    }
+}

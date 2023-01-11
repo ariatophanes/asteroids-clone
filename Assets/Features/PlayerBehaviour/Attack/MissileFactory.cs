@@ -1,0 +1,51 @@
+using System;
+using Core.Infrastructure;
+using Core.ViewBindingAutomation;
+using Damaging.Components;
+using DeathProcessing;
+using MovementBehaviour.Forward;
+using Presets;
+using Simulation.Physics2D;
+using Simulation.Physics2D.Collisions;
+using Simulation.Physics2D.Extensions;
+using static Damaging.Components.TeamMember;
+
+namespace PlayerBehaviour.Attack
+{
+    public class MissileFactory : IMissileFactory
+    {
+        private readonly IWorld world;
+        private readonly MissilePreset preset;
+        private readonly TeamTag teamTag;
+
+        public MissileFactory(IWorld world, MissilePreset preset, TeamTag teamTag = TeamTag.Blue)
+        {
+            this.teamTag = teamTag;
+            this.preset = preset;
+            this.world = world;
+        }
+
+        public void Create(Transform origin, float distance = 0.5f)
+        {
+            var missile = this.world.NewEntity();
+
+            var rot = origin.Rotation;
+            var posX = origin.Position.X + Math.Cos(origin.Rotation.ToRadians()) * distance;
+            var posY = origin.Position.Y + Math.Sin(origin.Rotation.ToRadians()) * distance;
+
+            this.world.SetComponent(missile, new Transform((float) posX, (float) posY, rot));
+            this.world.SetComponent(missile, new AutoViewBinding(this.preset.ViewPath));
+            this.world.SetComponent(missile, new TeamMember(this.teamTag));
+            this.world.SetComponent(missile, preset.Damage);
+            this.world.SetComponent(missile, preset.Rb);
+            this.world.SetComponent(missile, preset.Radius);
+            this.world.SetComponent<CircleCollider2D>(missile);
+            this.world.SetComponent<MoveForwardBehaviour>(missile);
+        }
+    }
+
+    public interface IMissileFactory
+    {
+        void Create(Transform origin, float distance);
+    }
+}
