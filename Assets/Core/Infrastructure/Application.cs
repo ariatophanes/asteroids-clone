@@ -1,5 +1,3 @@
-using Core.ViewBindingAutomation;
-
 namespace Core.Infrastructure
 {
     public abstract class Application

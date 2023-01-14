@@ -1,7 +1,6 @@
 using Core.Infrastructure;
 using Core.Random;
 using Core.Timers;
-using Core.ViewBindingAutomation;
 using Damaging.Systems;
 using DeathProcessing.AsteroidsDeathProcessing;
 using EnemySpawning;

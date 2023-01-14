@@ -1,6 +1,6 @@
 using System;
 using Core.Ecs;
-using Core.ViewBindingAutomation;
+using Core.Infrastructure;
 using UnityEngine;
 using Application = Core.Infrastructure.Application;
 

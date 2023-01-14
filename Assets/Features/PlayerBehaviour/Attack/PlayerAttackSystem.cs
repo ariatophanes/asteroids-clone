@@ -2,7 +2,6 @@ using System.Linq;
 using Core.Ecs;
 using Core.Infrastructure;
 using Core.Tags;
-using Core.ViewBindingAutomation;
 using InputListening;
 using Simulation.Physics2D;
 

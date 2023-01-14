@@ -2,7 +2,6 @@ using System.Linq;
 using Core.Infrastructure;
 using Core.Random;
 using Core.Tags;
-using Core.ViewBindingAutomation;
 using Damaging.Components;
 using DeathProcessing;
 using Presets;

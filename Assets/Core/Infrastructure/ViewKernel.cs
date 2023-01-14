@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Core.Infrastructure;
 using UnityAdaptation;
 
-namespace Core.ViewBindingAutomation
+namespace Core.Infrastructure
 {
     public class ViewKernel : IViewKernel
     {
@@ -19,13 +18,13 @@ namespace Core.ViewBindingAutomation
 
         public void BindView(in int id, string path) => this.map[id] = this.assetProvider.InstantiateActor<IView>(path);
 
-        public void UnbindView(in int id) => map.Remove(id);
+        public void UnbindView(in int id) => this.map.Remove(id);
         
-        public void DestroyView(in int id) => map[id].DestroySelf();
+        public void DestroyView(in int id) => this.map[id].DestroySelf();
 
         public void Update()
         {
-            foreach (var (id, view) in map) view.OnUpdate(id, this.world);
+            foreach (var (id, view) in this.map) view.OnUpdate(id, this.world);
         }
     }
 }

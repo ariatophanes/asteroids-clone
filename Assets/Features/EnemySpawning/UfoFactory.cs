@@ -1,6 +1,5 @@
 using Core.Infrastructure;
 using Core.Random;
-using Core.ViewBindingAutomation;
 using EnemySpawning.Tags;
 using MovementBehaviour.TowardsPlayer;
 using Presets;

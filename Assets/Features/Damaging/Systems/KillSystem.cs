@@ -1,6 +1,5 @@
 using Core.Ecs;
 using Core.Infrastructure;
-using Core.ViewBindingAutomation;
 using Damaging.Components;
 using DeathProcessing;
 

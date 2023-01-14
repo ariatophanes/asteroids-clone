@@ -1,4 +1,4 @@
-namespace Core.ViewBindingAutomation
+namespace Core.Infrastructure
 {
     public interface IViewKernel
     {

@@ -1,5 +1,4 @@
 using Core.Infrastructure;
-using Core.ViewBindingAutomation;
 using UnityAdaptation.InputListener;
 using UnityAdaptation.Simulation;
 
