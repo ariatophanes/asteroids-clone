@@ -13,6 +13,5 @@ namespace Core.Infrastructure
         void RemoveComponent<T>(in int id);
         IEnumerable<int> Filter(params Type[] include);
         bool HasEntity(int entity);
-        bool IsAlive(in int entity);
     }
 }

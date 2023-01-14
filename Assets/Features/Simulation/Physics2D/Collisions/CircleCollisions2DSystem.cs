@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Core.Ecs;
 using Core.Infrastructure;
+using UnityEngine;
 
 namespace Simulation.Physics2D.Collisions
 {
@@ -24,16 +25,16 @@ namespace Simulation.Physics2D.Collisions
             while (this.entitiesToClean.Count > 0)
             {
                 var entity = this.entitiesToClean.Pop();
-                ref var collidedEntities = ref this.world.GetComponent<CollidedEntities>(entity);
-                collidedEntities.Entities.Clear();
+                if(!this.world.HasEntity(entity)) continue;
+                ref var collidedEntities = ref this.world.GetComponent<Collidable>(entity);
+                collidedEntities.CollidedEntities.Clear();
             }
 
             foreach (var self in entities)
             {
                 ref var selfRadius = ref this.world.GetComponent<Radius>(self);
                 ref var selfTransform = ref this.world.GetComponent<Transform>(self);
-                ref var selfCollidedEntities = ref this.world.GetComponent<CollidedEntities>(self);
-                selfCollidedEntities.Entities ??= new Stack<int>(MaxCollisionsPerEntity);
+                ref var selfCollidedEntities = ref this.world.GetComponent<Collidable>(self);
 
                 foreach (var other in entities)
                 {
@@ -41,7 +42,6 @@ namespace Simulation.Physics2D.Collisions
 
                     ref var otherRadius = ref this.world.GetComponent<Radius>(other);
                     ref var otherTransform = ref this.world.GetComponent<Transform>(other);
-                    ref var otherCollidedEntities = ref this.world.GetComponent<CollidedEntities>(other);
 
                     var r = selfRadius.Value + otherRadius.Value;
                     var dx = otherTransform.Position.X - selfTransform.Position.X;
@@ -49,19 +49,10 @@ namespace Simulation.Physics2D.Collisions
 
                     if (dx * dx + dy * dy > r * r) continue;
 
-                    otherCollidedEntities.Entities ??= new Stack<int>(MaxCollisionsPerEntity);
-
-                    if (otherCollidedEntities.Entities.Count < MaxCollisionsPerEntity)
-                    {
-                        otherCollidedEntities.Entities.Push(self);
-                        this.entitiesToClean.Push(other);
-                    }
-
-                    if (selfCollidedEntities.Entities.Count < MaxCollisionsPerEntity)
-                    {
-                        selfCollidedEntities.Entities.Push(other);
-                        this.entitiesToClean.Push(self);
-                    }
+                    if (selfCollidedEntities.CollidedEntities.Count >= MaxCollisionsPerEntity) continue;
+                    
+                    selfCollidedEntities.CollidedEntities.Push(other);
+                    this.entitiesToClean.Push(self);
                 }
             }
         }

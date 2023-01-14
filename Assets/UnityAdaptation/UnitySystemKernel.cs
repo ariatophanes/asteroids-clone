@@ -42,8 +42,7 @@ namespace UnityAdaptation
         {
             foreach (var system in this.fixedUpdate) system.OnFixedUpdate();
         }
-
-
+        
         public void Stop()
         {
             foreach (var system in this.stop) system.OnStop();

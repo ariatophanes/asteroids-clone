@@ -58,7 +58,7 @@ namespace Core.Collections
             }
         }
 
-        public int IndexOf(int sparse) => this._s[sparse];
+        public int IndexOf(int value) => this._s[value];
 
         /// <summary>
         /// Determines whether the set contains the given value.

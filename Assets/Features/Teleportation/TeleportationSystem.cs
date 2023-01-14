@@ -16,25 +16,26 @@ namespace Teleportation
         
         public void OnUpdate()
         {
-            var screenBordersEnt = this.world.Filter(typeof(GamingField)).First();
-            ref var screen = ref this.world.GetComponent<GamingField>(screenBordersEnt);
+            var fieldEnt = this.world.Filter(typeof(GamingField)).First();
+            ref var field = ref this.world.GetComponent<GamingField>(fieldEnt);
 
             foreach (var entity in this.world.Filter(typeof(Transform), typeof(Radius)))
             {
                 ref var transform = ref this.world.GetComponent<Transform>(entity);
                 ref var radius = ref this.world.GetComponent<Radius>(entity);
+                var offset = radius.Value / 4;
+                
+                if (transform.Position.X < field.BoundsHorizontal.X - offset)
+                    transform.Position.X = field.BoundsHorizontal.Y + offset;
 
-                if (transform.Position.X < screen.BoundsHorizontal.X - radius.Value)
-                    transform.Position.X = screen.BoundsHorizontal.Y + radius.Value;
+                if (transform.Position.X > field.BoundsHorizontal.Y + offset)
+                    transform.Position.X = field.BoundsHorizontal.X - offset;
 
-                if (transform.Position.X > screen.BoundsHorizontal.Y + radius.Value)
-                    transform.Position.X = screen.BoundsHorizontal.X - radius.Value;
+                if (transform.Position.Y < field.BoundsVertical.X - offset)
+                    transform.Position.Y = field.BoundsVertical.Y + offset;
 
-                if (transform.Position.Y < screen.BoundsVertical.X - radius.Value)
-                    transform.Position.Y = screen.BoundsVertical.Y + radius.Value;
-
-                if (transform.Position.Y > screen.BoundsVertical.Y + radius.Value)
-                    transform.Position.Y = screen.BoundsVertical.X - radius.Value;
+                if (transform.Position.Y > field.BoundsVertical.Y + offset)
+                    transform.Position.Y = field.BoundsVertical.X - offset;
             }
         }
     }

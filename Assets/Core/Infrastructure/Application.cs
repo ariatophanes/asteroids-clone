@@ -1,24 +1,25 @@
+using Core.ViewBindingAutomation;
+
 namespace Core.Infrastructure
 {
     public abstract class Application
     {
         private readonly IWorld world;
-        private readonly IViewKernel viewKernel;
         private readonly ISystemKernel systemKernel;
+        private readonly IViewKernel viewKernel;
 
-        protected Application(IWorld world, IViewKernel viewKernel, ISystemKernel systemKernel)
+        protected Application(IWorld world, ISystemKernel systemKernel)
         {
-            this.viewKernel = viewKernel;
             this.systemKernel = systemKernel;
             this.world = world;
         }
 
-        protected abstract void InstallSystems(ISystemKernel systemKernel, IWorld models, IViewKernel viewKernel);
+        protected abstract void InstallSystems();
         
         //todo: extract methods into interface
         public void Run()
         {
-            InstallSystems(this.systemKernel, this.world, this.viewKernel);
+            InstallSystems();
             this.systemKernel.Run();
         }
 
@@ -36,11 +37,6 @@ namespace Core.Infrastructure
         public void FixedUpdate()
         {
             this.systemKernel.FixedUpdate();
-        }
-
-        public void LateUpdate()
-        {
-            this.viewKernel.Update();
         }
     }
 }

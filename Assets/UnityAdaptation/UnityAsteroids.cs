@@ -1,15 +1,16 @@
 using Core.Infrastructure;
+using Core.ViewBindingAutomation;
 using UnityAdaptation.InputListener;
 using UnityAdaptation.Simulation;
 
 namespace UnityAdaptation
 {
-    public class UnityGame : Game
+    public class UnityAsteroids : Asteroids
     {
         private readonly IWorld world;
         private readonly ISystemKernel systemKernel;
 
-        public UnityGame(IWorld world, IViewKernel viewKernel, ISystemKernel systemKernel) : base(world, viewKernel, systemKernel)
+        public UnityAsteroids(IWorld world, ISystemKernel systemKernel, IViewKernel viewKernel, IAssetProvider assetProvider) : base(world, systemKernel, viewKernel, assetProvider)
         {
             this.systemKernel = systemKernel;
             this.world = world;

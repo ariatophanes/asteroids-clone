@@ -19,7 +19,7 @@ MonoBehaviour:
       AngularMomentumSpeed: 0
       Deceleration: 0.0325
     Radius:
-      Value: 0.5
+      Value: 0.2
     ViewPath: Views/Player
   <MissilePresets>k__BackingField:
     Gun:
@@ -29,7 +29,7 @@ MonoBehaviour:
         AngularMomentumSpeed: 0
         Deceleration: 0
       Radius:
-        Value: 1
+        Value: 0.1
       Damage:
         Value: 1
       AttackType: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
         AngularMomentumSpeed: 0
         Deceleration: 0
       Radius:
-        Value: 1
+        Value: 0.1
       Damage:
         Value: 99999
       AttackType: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
         AngularMomentumSpeed: 0
         Deceleration: 0.035
       Radius:
-        Value: 0.5
+        Value: 0.2
       ViewPath: Views/Enemies/UFO
       Damageable:
         ReceivedDamage: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
         AngularMomentumSpeed: 0
         Deceleration: 0
       Radius:
-        Value: 1
+        Value: 0.5
       ViewPath: Views/Enemies/Asteroid
       Damageable:
         ReceivedDamage: 0

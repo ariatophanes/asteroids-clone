@@ -9,33 +9,33 @@ using EnemySpawning.Tags;
 using MovementBehaviour.Forward;
 using MovementBehaviour.TowardsPlayer;
 using PlayerBehaviour.Attack;
-using PlayerBehaviour.Collisions;
 using PlayerBehaviour.Movement;
 using PlayerBehaviour.Spawn;
 using Simulation.Physics2D;
 using Simulation.Physics2D.Collisions;
 using Teleportation;
 using UnityAdaptation;
-using UnityEngine;
-using Application = Core.Infrastructure.Application;
 
-public abstract class Game : Application
+public abstract class Asteroids : Application
 {
-    private IWorld world;
-    private IViewKernel viewKernel;
-    private ISystemKernel systemKernel;
-    private IRandom random;
+    private readonly IWorld world;
+    private readonly ISystemKernel systemKernel;
+    private readonly IViewKernel viewsKernel;
+    private readonly IRandom random;
+    private readonly IAssetProvider assetProvider;
 
-    protected Game(IWorld world, IViewKernel viewKernel, ISystemKernel systemKernel) : base(world, viewKernel, systemKernel) { }
-
-    protected override void InstallSystems(ISystemKernel systemKernel, IWorld world, IViewKernel viewKernel)
+    protected Asteroids(IWorld world, ISystemKernel systemKernel, IViewKernel viewsKernel, IAssetProvider assetProvider) : base(world, systemKernel)
     {
         this.systemKernel = systemKernel;
-        this.viewKernel = viewKernel;
         this.world = world;
         this.random = new SystemRandom();
+        this.viewsKernel = viewsKernel;
+        this.assetProvider = assetProvider;
+    }
 
-        var presets = Resources.Load<EntityPresets>("Configs/EntityPresets");
+    protected override void InstallSystems()
+    {
+        var presets = this.assetProvider.Load<EntityPresets>("Configs/EntityPresets");
 
         InstallCoreSystems();
         InstallSimulation();
@@ -44,7 +44,7 @@ public abstract class Game : Application
         InstallPlayerSystems(presets);
         InstallMovementSystems();
         InstallCollisionSystems();
-        ViewBindingsAutomation();
+        InstallKillSystem();
     }
 
     protected abstract void InstallSimulation();
@@ -71,17 +71,15 @@ public abstract class Game : Application
     private void InstallCollisionSystems()
     {
         this.systemKernel.AddSystem(new CollisionDamageSystem(this.world));
-        this.systemKernel.AddSystem(new PlayerCollisionsSystem(this.world));
-        this.systemKernel.AddSystem(new KillSystem(this.world));
         this.systemKernel.AddSystem(new CircleCollisions2DSystem(this.world));
     }
 
     private void InstallPlayerSystems(EntityPresets presets)
     {
-        var bulletFactory = new MissileFactory(this.world, presets.MissilePresets.Gun);
-        var laserFactory = new MissileFactory(this.world, presets.MissilePresets.Laser);
+        var bulletFactory = new MissileFactory(this.world, presets.MissilePresets.Gun, this.viewsKernel);
+        var laserFactory = new MissileFactory(this.world, presets.MissilePresets.Laser, this.viewsKernel);
 
-        this.systemKernel.AddSystem(new PlayerSpawningSystem(this.world, presets));
+        this.systemKernel.AddSystem(new PlayerSpawningSystem(this.world, presets, this.viewsKernel));
         this.systemKernel.AddSystem(new PlayerMovementSystem(this.world));
         this.systemKernel.AddSystem(new PlayerAttackSystem(this.world, bulletFactory, AttackType.Gun));
         this.systemKernel.AddSystem(new PlayerAttackSystem(this.world, laserFactory, AttackType.Laser));
@@ -92,16 +90,16 @@ public abstract class Game : Application
         var ufoPreset = presets.EnemyPresets.Ufo;
         var asteroidPreset = presets.EnemyPresets.Asteroid;
 
-        var asteroidsFactory = new AsteroidFactory(this.world, asteroidPreset, this.random);
-        var ufoFactory = new UfoFactory(this.world, ufoPreset, this.random);
+        var asteroidsFactory = new AsteroidFactory(this.world, asteroidPreset, this.random, this.viewsKernel);
+        var ufoFactory = new UfoFactory(this.world, ufoPreset, this.random, this.viewsKernel);
 
         this.systemKernel.AddSystem(new EnemySpawnSystem(asteroidsFactory, this.world, interval: 5));
         this.systemKernel.AddSystem(new EnemySpawnSystem(ufoFactory, this.world, interval: 15));
         this.systemKernel.AddSystem(new EnemyOnDeathCloningSystem(this.world, asteroidsFactory, typeof(Asteroid), this.random));
     }
-
-    private void ViewBindingsAutomation()
+    
+    private void InstallKillSystem()
     {
-        this.systemKernel.AddSystem(new ViewBindingAutomationSystem(this.world, this.viewKernel));
+       this.systemKernel.AddSystem(new KillSystem(this.world, this.viewsKernel));
     }
 }

@@ -2,9 +2,9 @@ namespace Damaging.Components
 {
     public struct TeamMember
     {
-        public TeamTag Team;
+        public TeamTag Tag;
 
-        public TeamMember(TeamTag team) => this.Team = team;
+        public TeamMember(TeamTag tag) => this.Tag = tag;
 
         public enum TeamTag
         {

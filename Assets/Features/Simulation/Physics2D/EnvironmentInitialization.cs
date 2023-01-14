@@ -12,7 +12,7 @@ namespace Simulation.Physics2D
         public void OnStart()
         {
             var simulation = this.world.NewEntity();
-            this.world.GetComponent<Time>(simulation);
+            this.world.SetComponent<Time>(simulation);
         }
     }
 }

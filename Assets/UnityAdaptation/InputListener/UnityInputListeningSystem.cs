@@ -23,7 +23,7 @@ namespace UnityAdaptation.InputListener
 
         public void OnStart()
         {
-            this.world.GetComponent<InputFrame>(this.world.NewEntity());
+            this.world.SetComponent<InputFrame>(this.world.NewEntity());
             this.controls.Enable();
         }
 

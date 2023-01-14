@@ -17,23 +17,24 @@ namespace PlayerBehaviour.Movement
 
         public void OnFixedUpdate()
         {
-            var playerEnt = this.world.Filter(typeof(Player)).FirstOrDefault();
             var inputEnt = this.world.Filter(typeof(InputFrame)).First();
+            var players = this.world.Filter(typeof(Player));
 
-            if (playerEnt < 0) return;
+            foreach (var player in players)
+            {
+                ref var input = ref this.world.GetComponent<InputFrame>(inputEnt);
+                ref var rb = ref this.world.GetComponent<Rigidbody2D>(player);
+                ref var t = ref this.world.GetComponent<Transform>(player);
 
-            ref var input = ref this.world.GetComponent<InputFrame>(inputEnt);
-            ref var rb = ref this.world.GetComponent<Rigidbody2D>(playerEnt);
-            ref var t = ref this.world.GetComponent<Transform>(playerEnt);
+                var xAxis = input.HorizontalAxis;
+                var yAxis = Math.Clamp(input.VerticalAxis, 0, 1);
+                var xForce = (float) Math.Cos(t.Rotation.ToRadians()) * 10;
+                var yForce = (float) Math.Sin(t.Rotation.ToRadians()) * 10;
 
-            var xAxis = input.HorizontalAxis;
-            var yAxis = Math.Clamp(input.VerticalAxis, 0, 1);
-            var xForce = (float) Math.Cos(t.Rotation.ToRadians()) * 10;
-            var yForce = (float) Math.Sin(t.Rotation.ToRadians()) * 10;
-
-            rb.AngularForce += xAxis * 10000;
-            rb.LinearForce.X += yAxis * xForce;
-            rb.LinearForce.Y += yAxis * yForce;
+                rb.AngularForce += xAxis * 10000;
+                rb.LinearForce.X += yAxis * xForce;
+                rb.LinearForce.Y += yAxis * yForce;
+            }
         }
     }
 }

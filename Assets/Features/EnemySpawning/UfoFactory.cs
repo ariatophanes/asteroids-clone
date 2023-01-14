@@ -1,5 +1,6 @@
 using Core.Infrastructure;
 using Core.Random;
+using Core.ViewBindingAutomation;
 using EnemySpawning.Tags;
 using MovementBehaviour.TowardsPlayer;
 using Presets;
@@ -10,7 +11,8 @@ namespace EnemySpawning
     {
         private readonly IWorld world;
 
-        public UfoFactory(IWorld world, EnemyPreset preset, IRandom random) : base(world, preset, random) => this.world = world;
+        public UfoFactory(IWorld world, EnemyPreset preset, IRandom random, IViewKernel viewKernel) : base(world, preset, random, viewKernel) =>
+            this.world = world;
 
         public override int Create()
         {

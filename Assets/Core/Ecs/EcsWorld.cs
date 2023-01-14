@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Ecs.Reserved.Tags;
 using Core.Infrastructure;
 using static System.Int16;
 
@@ -9,32 +8,10 @@ namespace Core.Ecs
 {
     public class EcsWorld : IWorld
     {
-        private readonly IDictionary<Type, IComponentsStorage> componentStorages;
+        private readonly IDictionary<Type, IComponentsPool> componentStorages;
         private int entityCounter;
 
-        public EcsWorld()
-        {
-            this.componentStorages = new Dictionary<Type, IComponentsStorage>(capacity: MaxValue);
-        }
-
-        public void Dispose()
-        {
-            this.componentStorages.Clear();
-            this.entityCounter = 0;
-        }
-
-        public IEnumerable<int> Filter(params Type[] include)
-        {
-            if (include.Length == 1)
-            {
-                var type = include.First();
-                if (!this.componentStorages.ContainsKey(type)) return Array.Empty<int>();
-                return this.componentStorages[type];
-            }
-
-            var storages = include.Select(GetEntitiesOfType);
-            return storages.Aggregate((prev, next) => prev.Intersect(next));
-        }
+        public EcsWorld() => this.componentStorages = new Dictionary<Type, IComponentsPool>(capacity: MaxValue);
 
         public int NewEntity() => this.entityCounter++;
 
@@ -52,11 +29,11 @@ namespace Core.Ecs
             storage.SetComponent(id, component);
         }
 
-        private SparseComponentsStorage<T> GetComponentsStorage<T>()
+        private ComponentsPool<T> GetComponentsStorage<T>()
         {
             var type = typeof(T);
-            if (!this.componentStorages.ContainsKey(type)) this.componentStorages[type] = new SparseComponentsStorage<T>(capacity: MaxValue);
-            return (SparseComponentsStorage<T>) this.componentStorages[type];
+            if (!this.componentStorages.ContainsKey(type)) this.componentStorages[type] = new ComponentsPool<T>(capacity: MaxValue);
+            return (ComponentsPool<T>) this.componentStorages[type];
         }
 
         private IEnumerable<int> GetEntitiesOfType(Type type)
@@ -73,9 +50,27 @@ namespace Core.Ecs
 
         public bool HasComponent<T>(in int id) => GetComponentsStorage<T>().HasEntity(id);
 
-        public bool HasEntity(int entity) => this.componentStorages.Values.Any(t => t.Contains(entity));
-        public bool IsAlive(in int entity) => !HasComponent<Dead>(entity);
+        public bool HasEntity(int entity) => this.componentStorages.Any(c => c.Value.HasEntity(entity));
 
         public void RemoveComponent<T>(in int id) => this.componentStorages[typeof(T)].RemoveEntity(id);
+
+        public IEnumerable<int> Filter(params Type[] include)
+        {
+            if (include.Length == 1)
+            {
+                var type = include.First();
+                if (!this.componentStorages.ContainsKey(type)) return Array.Empty<int>();
+                return this.componentStorages[type].ToList();
+            }
+
+            var storages = include.Select(GetEntitiesOfType);
+            return storages.Aggregate((prev, next) => prev.Intersect(next));
+        }
+
+        public void Dispose()
+        {
+            this.componentStorages.Clear();
+            this.entityCounter = 0;
+        }
     }
 }

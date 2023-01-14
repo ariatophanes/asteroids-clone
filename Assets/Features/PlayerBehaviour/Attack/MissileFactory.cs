@@ -17,9 +17,11 @@ namespace PlayerBehaviour.Attack
         private readonly IWorld world;
         private readonly MissilePreset preset;
         private readonly TeamTag teamTag;
+        private readonly IViewKernel viewsKernel;
 
-        public MissileFactory(IWorld world, MissilePreset preset, TeamTag teamTag = TeamTag.Blue)
+        public MissileFactory(IWorld world, MissilePreset preset, IViewKernel viewsKernel, TeamTag teamTag = TeamTag.Blue)
         {
+            this.viewsKernel = viewsKernel;
             this.teamTag = teamTag;
             this.preset = preset;
             this.world = world;
@@ -34,13 +36,16 @@ namespace PlayerBehaviour.Attack
             var posY = origin.Position.Y + Math.Sin(origin.Rotation.ToRadians()) * distance;
 
             this.world.SetComponent(missile, new Transform((float) posX, (float) posY, rot));
-            this.world.SetComponent(missile, new AutoViewBinding(this.preset.ViewPath));
             this.world.SetComponent(missile, new TeamMember(this.teamTag));
+            this.world.SetComponent(missile, new Damageable(1));
+            this.world.SetComponent(missile, new Collidable(5));
             this.world.SetComponent(missile, preset.Damage);
             this.world.SetComponent(missile, preset.Rb);
             this.world.SetComponent(missile, preset.Radius);
             this.world.SetComponent<CircleCollider2D>(missile);
+            this.world.SetComponent<Mortal>(missile);
             this.world.SetComponent<MoveForwardBehaviour>(missile);
+            this.viewsKernel.BindView(missile, this.preset.ViewPath);
         }
     }
 
