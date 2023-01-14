@@ -9,7 +9,7 @@ namespace UnityAdaptation
         private readonly IWorld world;
         private readonly ISystemKernel systemKernel;
 
-        public UnityAsteroids(IWorld world, ISystemKernel systemKernel, IViewKernel viewKernel, IAssetProvider assetProvider) : base(world, systemKernel, viewKernel, assetProvider)
+        public UnityAsteroids(IWorld world, ISystemKernel systemKernel, IViewKernel viewKernel, IActorFactory actorFactory) : base(world, systemKernel, viewKernel, actorFactory)
         {
             this.systemKernel = systemKernel;
             this.world = world;

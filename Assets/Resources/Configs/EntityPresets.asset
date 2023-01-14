@@ -29,30 +29,36 @@ MonoBehaviour:
         AngularMomentumSpeed: 0
         Deceleration: 0
       Radius:
-        Value: 0.1
+        Value: 0.05
       Damage:
         Value: 1
+      Damageable:
+        ReceivedDamage: 0
+        TolerableDamage: 1
       AttackType: 0
       ViewPath: Views/Missiles/Gun
     Laser:
       Rb:
-        Mass: 0.25
+        Mass: 0.1
         AngularForce: 0
         AngularMomentumSpeed: 0
         Deceleration: 0
       Radius:
-        Value: 0.1
+        Value: 0.05
       Damage:
         Value: 99999
+      Damageable:
+        ReceivedDamage: 0
+        TolerableDamage: 5
       AttackType: 1
       ViewPath: Views/Missiles/Laser
   <EnemyPresets>k__BackingField:
     Ufo:
       Type: 1
       Rb:
-        Mass: 1
+        Mass: 2
         AngularForce: 0
-        AngularMomentumSpeed: 0
+        AngularMomentumSpeed: 2
         Deceleration: 0.035
       Radius:
         Value: 0.2
@@ -68,7 +74,7 @@ MonoBehaviour:
         AngularMomentumSpeed: 0
         Deceleration: 0
       Radius:
-        Value: 0.5
+        Value: 1
       ViewPath: Views/Enemies/Asteroid
       Damageable:
         ReceivedDamage: 0

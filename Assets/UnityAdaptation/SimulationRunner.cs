@@ -6,7 +6,7 @@ using Application = Core.Infrastructure.Application;
 
 namespace UnityAdaptation
 {
-    public class AppRunner : MonoBehaviour
+    public class SimulationRunner : MonoBehaviour
     {
         private Application app;
         private ViewKernel viewKernel;
@@ -15,7 +15,7 @@ namespace UnityAdaptation
         {
             var world = new EcsWorld();
             var systemKernel = new UnitySystemKernel();
-            var assetProvider = new UnityAssetProvider();
+            var assetProvider = new UnityActorFactory();
             this.viewKernel = new ViewKernel(world, assetProvider);
 
             this.app = new UnityAsteroids(world, systemKernel, this.viewKernel, assetProvider);

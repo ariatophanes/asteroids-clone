@@ -36,11 +36,11 @@ namespace PlayerBehaviour.Attack
 
             this.world.SetComponent(missile, new Transform((float) posX, (float) posY, rot));
             this.world.SetComponent(missile, new TeamMember(this.teamTag));
-            this.world.SetComponent(missile, new Damageable(1));
             this.world.SetComponent(missile, new Collidable(5));
-            this.world.SetComponent(missile, preset.Damage);
-            this.world.SetComponent(missile, preset.Rb);
-            this.world.SetComponent(missile, preset.Radius);
+            this.world.SetComponent(missile, this.preset.Damage);
+            this.world.SetComponent(missile, this.preset.Rb);
+            this.world.SetComponent(missile, this.preset.Damageable);
+            this.world.SetComponent(missile, this.preset.Radius);
             this.world.SetComponent<CircleCollider2D>(missile);
             this.world.SetComponent<Mortal>(missile);
             this.world.SetComponent<MoveForwardBehaviour>(missile);

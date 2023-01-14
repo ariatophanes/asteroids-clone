@@ -11,6 +11,7 @@ namespace Presets
         public Rigidbody2D Rb;
         public Radius Radius;
         public Damage Damage;
+        public Damageable Damageable;
         public AttackType AttackType;
         public string ViewPath;
     }

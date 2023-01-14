@@ -21,28 +21,28 @@ public abstract class Asteroids : Application
     private readonly ISystemKernel systemKernel;
     private readonly IViewKernel viewsKernel;
     private readonly IRandom random;
-    private readonly IAssetProvider assetProvider;
+    private readonly IActorFactory actorFactory;
 
-    protected Asteroids(IWorld world, ISystemKernel systemKernel, IViewKernel viewsKernel, IAssetProvider assetProvider) : base(world, systemKernel)
+    protected Asteroids(IWorld world, ISystemKernel systemKernel, IViewKernel viewsKernel, IActorFactory actorFactory) : base(world, systemKernel)
     {
         this.systemKernel = systemKernel;
         this.world = world;
         this.random = new SystemRandom();
         this.viewsKernel = viewsKernel;
-        this.assetProvider = assetProvider;
+        this.actorFactory = actorFactory;
     }
 
     protected override void InstallSystems()
     {
-        var presets = this.assetProvider.Load<EntityPresets>("Configs/EntityPresets");
+        var presets = this.actorFactory.Load<EntityPresets>("Configs/EntityPresets");
 
         InstallCoreSystems();
         InstallSimulation();
         InstallPhysics();
+        InstallCollisionSystems();
         InstallEnemySystems(presets);
         InstallPlayerSystems(presets);
         InstallMovementSystems();
-        InstallCollisionSystems();
         InstallKillSystem();
     }
 
@@ -92,9 +92,9 @@ public abstract class Asteroids : Application
         var asteroidsFactory = new AsteroidFactory(this.world, asteroidPreset, this.random, this.viewsKernel);
         var ufoFactory = new UfoFactory(this.world, ufoPreset, this.random, this.viewsKernel);
 
-        this.systemKernel.AddSystem(new EnemySpawnSystem(asteroidsFactory, this.world, interval: 5));
-        this.systemKernel.AddSystem(new EnemySpawnSystem(ufoFactory, this.world, interval: 15));
-        this.systemKernel.AddSystem(new EnemyOnDeathCloningSystem(this.world, asteroidsFactory, typeof(Asteroid), this.random));
+        this.systemKernel.AddSystem(new EnemySpawnSystem(asteroidsFactory, this.world, interval: 6));
+        this.systemKernel.AddSystem(new EnemySpawnSystem(ufoFactory, this.world, interval: 12));
+        this.systemKernel.AddSystem(new EnemyCloningOnDeathSystem(this.world, asteroidsFactory, typeof(Asteroid), this.random));
     }
     
     private void InstallKillSystem()

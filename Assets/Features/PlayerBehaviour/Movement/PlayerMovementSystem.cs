@@ -31,7 +31,7 @@ namespace PlayerBehaviour.Movement
                 var xForce = (float) Math.Cos(t.Rotation.ToRadians()) * 10;
                 var yForce = (float) Math.Sin(t.Rotation.ToRadians()) * 10;
 
-                rb.AngularForce += xAxis * 10000;
+                rb.AngularForce += xAxis * 20000;
                 rb.LinearForce.X += yAxis * xForce;
                 rb.LinearForce.Y += yAxis * yForce;
             }
