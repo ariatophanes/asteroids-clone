@@ -1,6 +1,6 @@
 using System;
 
-namespace Damaging.Components
+namespace Features.Damaging.Components
 {
     [Serializable]
     public struct Damageable

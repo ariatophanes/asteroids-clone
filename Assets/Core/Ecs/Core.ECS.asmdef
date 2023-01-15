@@ -1,0 +1,17 @@
+{
+    "name": "Core.ECS",
+    "rootNamespace": "",
+    "references": [
+        "GUID:446bdf0365f124dbe96f3a9d8da8c592",
+        "GUID:bd3ec2f33914e4b55a807413cb3e9310"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

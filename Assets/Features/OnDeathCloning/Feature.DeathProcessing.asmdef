@@ -1,0 +1,22 @@
+{
+    "name": "Feature.DeathProcessing",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba0f2454c6e184c37a1dcd6f18c80a99",
+        "GUID:bd3ec2f33914e4b55a807413cb3e9310",
+        "GUID:78a564f485d624ef7bc78e59d151ccea",
+        "GUID:d924f02ae3a0645b3be4b74c67779682",
+        "GUID:81c9e56de95a945bc886ae82bd92237d",
+        "GUID:37061125339134220b3a86d421899bf9",
+        "GUID:7388ff298e25c46ffbc06299fc123571"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

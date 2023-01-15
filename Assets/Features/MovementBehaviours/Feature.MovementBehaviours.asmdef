@@ -1,0 +1,19 @@
+{
+    "name": "Feature.MovementBehaviours",
+    "rootNamespace": "",
+    "references": [
+        "GUID:37061125339134220b3a86d421899bf9",
+        "GUID:ba0f2454c6e184c37a1dcd6f18c80a99",
+        "GUID:bd3ec2f33914e4b55a807413cb3e9310",
+        "GUID:d924f02ae3a0645b3be4b74c67779682"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

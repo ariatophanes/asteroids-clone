@@ -1,9 +1,9 @@
 using Core.Ecs;
 using Core.Infrastructure;
-using Damaging.Components;
-using DeathProcessing;
+using Core.SharedTags;
+using Features.Damaging.Components;
 
-namespace Damaging.Systems
+namespace Features.Damaging.Systems
 {
     public class KillSystem : IUpdateCallbackReceiver
     {

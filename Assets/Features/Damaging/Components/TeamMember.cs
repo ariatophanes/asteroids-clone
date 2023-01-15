@@ -1,4 +1,4 @@
-namespace Damaging.Components
+namespace Features.Damaging.Components
 {
     public struct TeamMember
     {

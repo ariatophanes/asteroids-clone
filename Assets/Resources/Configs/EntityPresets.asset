@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae9bb21987fd4f36a45e7c2614780f0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 59c1513f008d54db1993cc373851639b, type: 3}
   m_Name: EntityPresets
   m_EditorClassIdentifier: 
   <PlayerPreset>k__BackingField:
@@ -18,50 +18,52 @@ MonoBehaviour:
       AngularForce: 0
       AngularMomentumSpeed: 0
       Deceleration: 0.0325
+      IsKinematic: 0
     Radius:
       Value: 0.2
     ViewPath: Views/Player
   <MissilePresets>k__BackingField:
     Gun:
       Rb:
-        Mass: 0.25
+        Mass: 0.18
         AngularForce: 0
         AngularMomentumSpeed: 0
         Deceleration: 0
+        IsKinematic: 1
       Radius:
-        Value: 0.05
+        Value: 0.08
       Damage:
         Value: 1
       Damageable:
         ReceivedDamage: 0
         TolerableDamage: 1
-      AttackType: 0
       ViewPath: Views/Missiles/Gun
     Laser:
       Rb:
-        Mass: 0.1
+        Mass: 0.05
         AngularForce: 0
         AngularMomentumSpeed: 0
         Deceleration: 0
+        IsKinematic: 1
       Radius:
-        Value: 0.05
+        Value: 0.08
       Damage:
-        Value: 99999
+        Value: 999
       Damageable:
         ReceivedDamage: 0
         TolerableDamage: 5
-      AttackType: 1
       ViewPath: Views/Missiles/Laser
   <EnemyPresets>k__BackingField:
     Ufo:
       Type: 1
       Rb:
-        Mass: 2
+        Mass: 1.5
         AngularForce: 0
-        AngularMomentumSpeed: 2
-        Deceleration: 0.035
+        AngularMomentumSpeed: 0
+        Deceleration: 0.038
+        IsKinematic: 0
       Radius:
-        Value: 0.2
+        Value: 0.3
       ViewPath: Views/Enemies/UFO
       Damageable:
         ReceivedDamage: 0
@@ -69,13 +71,27 @@ MonoBehaviour:
     Asteroid:
       Type: 0
       Rb:
-        Mass: 4
+        Mass: 3
         AngularForce: 0
         AngularMomentumSpeed: 0
         Deceleration: 0
+        IsKinematic: 0
       Radius:
         Value: 1
       ViewPath: Views/Enemies/Asteroid
       Damageable:
         ReceivedDamage: 0
         TolerableDamage: 6
+  <AttackPresets>k__BackingField:
+    FirstAttack:
+      CurrentReloadingTime: 0
+      ReloadingTime: 0
+      AmmoMagazineFull: 9999
+      AmmoMagazine: 9999
+      IsEmitting: 0
+    SecondAttack:
+      CurrentReloadingTime: 0
+      ReloadingTime: 10
+      AmmoMagazineFull: 2
+      AmmoMagazine: 2
+      IsEmitting: 0

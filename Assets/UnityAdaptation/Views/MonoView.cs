@@ -1,7 +1,6 @@
-using Core.Ecs;
 using Core.Infrastructure;
 using UnityEngine;
-using Transform = Simulation.Physics2D.Transform;
+using Transform = Core.Simulation.Common.Transform;
 
 namespace UnityAdaptation.Views
 {

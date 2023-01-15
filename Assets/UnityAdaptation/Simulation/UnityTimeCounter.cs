@@ -1,9 +1,6 @@
 using System.Linq;
-using Core;
-using Core.Ecs;
 using Core.Infrastructure;
-using Simulation;
-using Simulation.Physics2D;
+using Core.Simulation.Common;
 
 namespace UnityAdaptation.Simulation
 {

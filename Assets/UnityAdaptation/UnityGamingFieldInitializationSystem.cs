@@ -1,6 +1,5 @@
-using Core.Ecs;
 using Core.Infrastructure;
-using Simulation.Common;
+using Core.Simulation.Common;
 using UnityEngine;
 
 namespace UnityAdaptation

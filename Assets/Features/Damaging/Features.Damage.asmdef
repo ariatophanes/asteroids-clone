@@ -1,0 +1,21 @@
+{
+    "name": "Features.Damaging",
+    "rootNamespace": "",
+    "references": [
+        "GUID:446bdf0365f124dbe96f3a9d8da8c592",
+        "GUID:ba0f2454c6e184c37a1dcd6f18c80a99",
+        "GUID:bd3ec2f33914e4b55a807413cb3e9310",
+        "GUID:d924f02ae3a0645b3be4b74c67779682",
+        "GUID:829cc05eaa8764d2c9e38771ad46eebd",
+        "GUID:37061125339134220b3a86d421899bf9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

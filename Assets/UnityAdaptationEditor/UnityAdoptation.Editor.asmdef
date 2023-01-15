@@ -1,0 +1,22 @@
+{
+    "name": "UnityAdoptation.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:82740afc41bc94eb3a8f9a513bd75dde",
+        "GUID:81c9e56de95a945bc886ae82bd92237d",
+        "GUID:7388ff298e25c46ffbc06299fc123571",
+        "GUID:d924f02ae3a0645b3be4b74c67779682",
+        "GUID:1f1c6d817f11549c0a930b9aa398bb26"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

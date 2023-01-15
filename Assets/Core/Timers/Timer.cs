@@ -1,14 +1,18 @@
+using System;
+using UnityEngine.Serialization;
+
 namespace Core.Timers
 {
+    [Serializable]
     public struct Timer
     {
         public float ElapsedTime;
-        public float LifeTime;
+        [FormerlySerializedAs("LifeTime")] public float Interval;
         public bool IsActive;
 
         public void Activate(float lifeTime)
         {
-            this.LifeTime = lifeTime;
+            this.Interval = lifeTime;
             this.IsActive = true;
         }
 

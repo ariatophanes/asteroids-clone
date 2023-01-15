@@ -1,0 +1,20 @@
+{
+    "name": "Feature.Teleportation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba0f2454c6e184c37a1dcd6f18c80a99",
+        "GUID:21737f9b40b3a4f41a993cf72fc7d5c9",
+        "GUID:78a564f485d624ef7bc78e59d151ccea",
+        "GUID:bd3ec2f33914e4b55a807413cb3e9310",
+        "GUID:d924f02ae3a0645b3be4b74c67779682"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

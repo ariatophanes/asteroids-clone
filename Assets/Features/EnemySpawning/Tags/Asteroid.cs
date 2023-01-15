@@ -1,4 +1,4 @@
-namespace EnemySpawning.Tags
+namespace Features.EnemySpawning.Tags
 {
     public struct Asteroid { }
 }

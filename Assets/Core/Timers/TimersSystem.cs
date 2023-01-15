@@ -1,7 +1,6 @@
 using System.Linq;
-using Core.Ecs;
 using Core.Infrastructure;
-using Simulation.Physics2D;
+using Core.Simulation.Common;
 
 namespace Core.Timers
 {
@@ -26,7 +25,7 @@ namespace Core.Timers
                 
                 timer.ElapsedTime += time.Delta;
                 
-                if (timer.ElapsedTime > timer.LifeTime) timer.Deactivate();
+                if (timer.ElapsedTime > timer.Interval) timer.Deactivate();
             }
         }
     }

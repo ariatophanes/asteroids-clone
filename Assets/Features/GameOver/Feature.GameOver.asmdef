@@ -1,0 +1,21 @@
+{
+    "name": "Feature.GameOver",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba0f2454c6e184c37a1dcd6f18c80a99",
+        "GUID:37061125339134220b3a86d421899bf9",
+        "GUID:cb3f06ccbb4314060a89cf8f982a49af",
+        "GUID:21737f9b40b3a4f41a993cf72fc7d5c9",
+        "GUID:bd3ec2f33914e4b55a807413cb3e9310",
+        "GUID:7388ff298e25c46ffbc06299fc123571"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

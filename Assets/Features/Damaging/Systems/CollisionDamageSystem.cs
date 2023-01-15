@@ -1,11 +1,11 @@
 using Core.Ecs;
 using Core.Infrastructure;
-using Damaging.Components;
-using DeathProcessing;
-using Simulation.Physics2D;
-using Simulation.Physics2D.Collisions;
+using Core.SharedTags;
+using Core.Simulation.Physics2D;
+using Core.Simulation.Physics2D.Collisions;
+using Features.Damaging.Components;
 
-namespace Damaging.Systems
+namespace Features.Damaging.Systems
 {
     public class CollisionDamageSystem : IUpdateCallbackReceiver
     {
@@ -22,7 +22,6 @@ namespace Damaging.Systems
                 ref var selfCollidedEntities = ref this.world.GetComponent<Collidable>(self);
                 ref var selfTeam = ref this.world.GetComponent<TeamMember>(self);
                 ref var selfDamageable = ref this.world.GetComponent<Damageable>(self);
-                ref var selfMortal = ref this.world.GetComponent<Mortal>(self);
                 ref var selfRb = ref this.world.GetComponent<Rigidbody2D>(self);
 
                 foreach (var other in selfCollidedEntities.CollidedEntities)
@@ -37,20 +36,18 @@ namespace Damaging.Systems
                     if (otherTeam.Tag == selfTeam.Tag) continue;
 
                     // ApplyForce(ref selfRb, ref otherRb);
-                    ApplyDamage(ref selfMortal, ref selfDamageable, otherDamage);
+                    ApplyDamage(ref selfDamageable, otherDamage);
+                    ApplyForce(ref selfRb, ref otherRb);
                 }
             }
         }
 
-        private static void ApplyDamage(ref Mortal mortal, ref Damageable damageable, in Damage damage)
-        {
-            damageable.ReceivedDamage += damage.Value;
-            if (damageable.ReceivedDamage > damageable.TolerableDamage) mortal.IsDead = true;
-        }
+        private static void ApplyDamage(ref Damageable damageable, in Damage damage) => damageable.ReceivedDamage += damage.Value;
 
         private static void ApplyForce(ref Rigidbody2D selfRb, ref Rigidbody2D otherRb)
         {
-            otherRb.LinearForce += selfRb.LinearForce / otherRb.Mass;
+            if(otherRb.IsKinematic) return;
+            otherRb.LinearForce += selfRb.LinearForce * 30;
         }
     }
 }
